@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from '../Page/Home'
 import Header from '../Components/Header'
-import Footer from '../Components/Footer'
+import Pesquisar from '../Page/Pesquisar'
+import AddPost from '../Page/AddPost'
+import Favoritos from '../Page/Favoritos'
+import MyAccount from '../Page/MyAccount'
 
 export default function RoutesApp() {
   return (
@@ -9,8 +12,11 @@ export default function RoutesApp() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/pesquisar" element={<Pesquisar />} />
+        <Route path="/addpost" element={<AddPost />} />
+        <Route path="/favoritos" element={<Favoritos />} />
+        <Route path="/myaccount" element={<MyAccount />} />
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }

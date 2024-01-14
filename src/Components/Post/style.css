@@ -1,0 +1,45 @@
+#container-post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.card-title-post {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-post {
+  margin: 10px;
+}
+.card-perfil {
+  display: flex;
+  align-items: center;
+}
+.perfil-photo {
+  background-color: rgba(181, 181, 181, 0.902);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+}
+.post-img {
+  max-width: 520px;
+  padding: 5px;
+}
+.post-mensagem {
+}
+.interacao-post {
+  display: flex;
+  font-size: 22px;
+}
+.interacao-post div {
+  margin: 5px;
+}
+
+@media (max-width: 550px) {
+  .post-img {
+    max-width: 100%;
+    padding: 5px;
+  }
+}

@@ -1,7 +1,11 @@
+import Posts from '../../Components/Post'
+import Stories from '../../Components/Stories'
+
 export default function Home() {
   return (
     <div>
-      <h1>Hello, page Home !</h1>
+      <Stories />
+      <Posts />
     </div>
   )
 }

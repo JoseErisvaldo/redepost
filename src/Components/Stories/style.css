@@ -1,0 +1,11 @@
+.card-stories {
+  display: flex;
+}
+
+.img-stories {
+  margin: 15px 5px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background-color: rgba(65, 65, 65, 0.145);
+}
