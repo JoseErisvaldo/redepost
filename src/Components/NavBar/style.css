@@ -1,0 +1,16 @@
+.navBar {
+  max-width: 720px;
+
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navBar div {
+  font-size: 27px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.navBar div:hover {
+  scale: 1.1;
+}
