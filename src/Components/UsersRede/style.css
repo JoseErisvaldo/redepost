@@ -37,13 +37,13 @@
 }
 
 @media (max-width: 500px) {
-  #container-rede {
-    display: flex;
-    justify-content: center;
+  .card-rede {
     width: 100%;
   }
   .card-users-rede {
-    width: 290px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
   .img-users-rede {
     width: 60px;
