@@ -4,11 +4,14 @@
 }
 .container-my-account {
   display: flex;
+  flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.052);
 }
 .photo-my-account {
-  width: 100px;
-  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 .photo-my-account img {
   width: 75px;
