@@ -5,6 +5,7 @@ import Pesquisar from '../Page/Pesquisar'
 import AddPost from '../Page/AddPost'
 import Favoritos from '../Page/Favoritos'
 import MyAccount from '../Page/MyAccount'
+import Seguidores from '../Page/Seguidores'
 
 export default function RoutesApp() {
   return (
@@ -16,6 +17,7 @@ export default function RoutesApp() {
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/seguidores" element={<Seguidores />} />
       </Routes>
     </BrowserRouter>
   )

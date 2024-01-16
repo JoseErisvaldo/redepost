@@ -4,6 +4,7 @@ import { useEffect, useId, useState } from 'react'
 import { VscHeart } from 'react-icons/vsc'
 import { FaRegComment } from 'react-icons/fa'
 import { MdOutlineSave } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 
 export default function MyAccount() {
   const [user, setUser] = useState([])
@@ -67,9 +68,11 @@ export default function MyAccount() {
               <div className="publicacao-my-accout">
                 <span>{filterPost.length}</span> <span>publicações</span>
               </div>
-              <div className="seguidores">
-                <span>{resSeguidores}</span> <span>Seguidores</span>{' '}
-              </div>
+              <Link className="link" to={'/seguidores'}>
+                <div className="seguidores">
+                  <span>{resSeguidores}</span> <span>Seguidores</span>{' '}
+                </div>
+              </Link>
               <div className="seguindo">
                 <span>{resSeguindo}</span> <span>Seguindo</span>{' '}
               </div>

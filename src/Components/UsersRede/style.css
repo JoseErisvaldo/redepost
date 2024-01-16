@@ -1,0 +1,52 @@
+#container-rede {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.card-rede {
+  width: 480px;
+}
+.return-card-users-rede {
+  margin: 10px;
+  font-size: 26px;
+}
+.card-users-rede {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.img-users-rede {
+  margin: 10px;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(173, 172, 172);
+  border-radius: 50%;
+}
+.name-users-rede {
+  width: 170px;
+}
+.status-users-rede {
+  width: 200px;
+  text-align: end;
+}
+.btn-users-rede {
+  background-color: none;
+  border: 1px solid rgb(214, 213, 213);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+@media (max-width: 500px) {
+  #container-rede {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .card-users-rede {
+    width: 290px;
+  }
+  .img-users-rede {
+    width: 60px;
+    height: 45px;
+  }
+}
