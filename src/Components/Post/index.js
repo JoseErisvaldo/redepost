@@ -18,7 +18,7 @@ export default function Posts() {
   return (
     <div id="container-post">
       {listPost.map(item => (
-        <div className="card-post">
+        <div className="card-post" key={item.id}>
           <div className="card-title-post">
             <div className="card-perfil">
               <div className="perfil-photo"></div>
@@ -27,9 +27,9 @@ export default function Posts() {
             <div>{item.creat_att}</div>
           </div>
           <div>
-            <img className="post-img" src={item.Photo} />
+            <img className="post-img" src={item.photo} />
           </div>
-          <div className="post-mensagem">{item.Comment}</div>
+          <div className="post-mensagem">{item.comment}</div>
           <div className="interacao-post">
             <div>
               <VscHeart />

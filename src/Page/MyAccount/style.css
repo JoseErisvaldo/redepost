@@ -1,0 +1,92 @@
+#card-container-my-account {
+  display: flex;
+  justify-content: center;
+}
+.container-my-account {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.052);
+}
+.photo-my-account {
+  width: 100px;
+  height: 100px;
+}
+.photo-my-account img {
+  width: 75px;
+  border-radius: 50%;
+}
+.dados-account {
+  display: flex;
+}
+.publicacao-my-accout,
+.seguidores,
+.seguindo {
+  width: 125px;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.publicacao-my-accout {
+}
+.seguidores {
+}
+.seguindo {
+}
+.bio-my-account {
+  margin: 10px;
+}
+.post-card {
+  margin-top: 20px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-card img {
+  width: 100%;
+  height: 200px; /* ajuste conforme necessário */
+  object-fit: cover;
+}
+
+.post-details {
+  padding: 10px;
+}
+
+.post-details span {
+  font-weight: bold;
+}
+
+.post-details p {
+  margin-top: 5px;
+}
+
+@media (max-width: 560px) {
+  #card-container-my-account {
+    display: flex;
+    flex-direction: column;
+    justify-content: none;
+  }
+  .container-my-account {
+    display: flex;
+    flex-direction: column;
+  }
+  .photo-my-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .photo-my-account img {
+    margin-top: 10px;
+    width: 100px;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+  }
+  .seguidores,
+  .seguindo,
+  .publicacao-my-accout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
