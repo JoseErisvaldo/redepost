@@ -6,6 +6,7 @@ import AddPost from '../Page/AddPost'
 import Favoritos from '../Page/Favoritos'
 import MyAccount from '../Page/MyAccount'
 import Seguidores from '../Page/Seguidores'
+import Seguindo from '../Page/Seguindo'
 
 export default function RoutesApp() {
   return (
@@ -18,6 +19,7 @@ export default function RoutesApp() {
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/myaccount" element={<MyAccount />} />
         <Route path="/seguidores" element={<Seguidores />} />
+        <Route path="/seguindo" element={<Seguindo />} />
       </Routes>
     </BrowserRouter>
   )

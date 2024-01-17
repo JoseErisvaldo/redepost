@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UsereRede from '../../Components/UsersRede'
 import api from '../../Services'
-import { IoIosArrowBack } from 'react-icons/io'
-import { Link } from 'react-router-dom'
+import BtnReturn from '../../Components/BtnReturn'
 
 export default function Seguidores() {
   const userId = 1
@@ -44,14 +43,11 @@ export default function Seguidores() {
   console.log(filterJoin)
   return (
     <div>
-      <Link className="link" to={'/myaccount'}>
-        <div className="return-card-users-rede">
-          <IoIosArrowBack />
-        </div>
-      </Link>
-
+      <BtnReturn />
       {filterJoin.map(item =>
-        item.seguidores.map(seguidor => <UsereRede id={seguidor.firstName} />)
+        item.seguidores.map(seguidor => (
+          <UsereRede id={seguidor.firstName} status={'Seguidores'} />
+        ))
       )}
     </div>
   )

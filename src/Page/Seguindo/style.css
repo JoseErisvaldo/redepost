@@ -1,0 +1,4 @@
+.container-seguindo {
+  display: flex;
+  flex-direction: column;
+}

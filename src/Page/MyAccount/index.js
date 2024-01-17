@@ -74,7 +74,9 @@ export default function MyAccount() {
                 </div>
               </Link>
               <div className="seguindo">
-                <span>{resSeguindo}</span> <span>Seguindo</span>{' '}
+                <Link className="link" to={'/seguindo'}>
+                  <span>{resSeguindo}</span> <span>Seguindo</span>{' '}
+                </Link>
               </div>
             </div>
             <div className="bio-my-account">

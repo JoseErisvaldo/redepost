@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import './style.css'
 
-export default function UsereRede({ id }) {
+export default function UsereRede({ id, status }) {
   return (
     <div>
       <div id="container-rede">
@@ -12,7 +12,7 @@ export default function UsereRede({ id }) {
               <div className="name-users-rede">{id}</div>
             </Link>
             <div className="status-users-rede">
-              <button className="btn-users-rede">Remover</button>
+              <button className="btn-users-rede">{status}</button>
             </div>
           </div>
         </div>
