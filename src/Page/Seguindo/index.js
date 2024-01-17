@@ -35,7 +35,6 @@ export default function Seguindo() {
     .map(item => {
       return item.progresso
     })
-  console.log(filterDados)
   return (
     <div className="container-seguindo">
       <BtnReturn />
