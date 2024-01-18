@@ -1,12 +1,12 @@
 import api from '../../Services'
 import './style.css'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { VscHeart } from 'react-icons/vsc'
 import { FaRegComment } from 'react-icons/fa'
 import { MdOutlineSave } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
-export default function MyAccount() {
+export default function Account() {
   const [user, setUser] = useState([])
   const userId = 1
   const [post, setPost] = useState([])
@@ -57,15 +57,15 @@ export default function MyAccount() {
     return item.seguidores.length
   })
   return (
-    <div id="card-container-my-account">
+    <div id="card-container-profile">
       {filterId.map(item => (
-        <div className="container-my-account" key={item.id}>
-          <div className="photo-my-account">
+        <div className="container-profile" key={item.id}>
+          <div className="photo-profile">
             <img src={item.image} alt={`Image ${item.id}`} />
           </div>
           <div>
             <div className="dados-account">
-              <div className="publicacao-my-accout">
+              <div className="publicacao-profile">
                 <span>{filterPost.length}</span> <span>publicações</span>
               </div>
               <Link className="link" to={'/seguidores'}>
@@ -79,7 +79,7 @@ export default function MyAccount() {
                 </Link>
               </div>
             </div>
-            <div className="bio-my-account">
+            <div className="bio-profile">
               {item.bio && <div>{item.bio}</div>}
             </div>
           </div>

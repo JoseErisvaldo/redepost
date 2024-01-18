@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import UsereRede from '../../Components/UsersRede'
+import UserRede from '../../Components/UsersRede'
 import api from '../../Services'
 import BtnReturn from '../../Components/BtnReturn'
 import './style.css'
@@ -40,7 +40,7 @@ export default function Seguindo() {
       <BtnReturn />
       {filterDados.map(item =>
         item.seguindo.map(seguindo => (
-          <UsereRede
+          <UserRede
             key={seguindo.id}
             id={seguindo.firstName}
             status={'Seguindo'}

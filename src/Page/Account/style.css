@@ -1,32 +1,37 @@
-#card-container-my-account {
+#card-container-profile {
   display: flex;
   justify-content: center;
 }
-.container-my-account {
+.container-profile {
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.052);
 }
-.photo-my-account {
+.photo-profile {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
 }
-.photo-my-account img {
+.photo-profile img {
   width: 75px;
   border-radius: 50%;
 }
 .dados-account {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
 }
-.publicacao-my-accout,
+
 .seguidores,
-.seguindo {
-  width: 125px;
+.seguindo,
+.publicacao-profile {
+  width: 100px;
   padding: 5px;
   margin: 5px;
   cursor: pointer;
+  text-align: center;
 }
 .publicacao-my-accout {
 }
@@ -34,7 +39,7 @@
 }
 .seguindo {
 }
-.bio-my-account {
+.bio-profile {
   margin: 10px;
 }
 .post-card {
@@ -64,32 +69,33 @@
 }
 
 @media (max-width: 560px) {
-  #card-container-my-account {
+  #card-container-profile {
     display: flex;
     flex-direction: column;
     justify-content: none;
   }
-  .container-my-account {
+  .container-profile {
     display: flex;
     flex-direction: column;
   }
-  .photo-my-account {
+  .photo-profile {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
-  .photo-my-account img {
+  .photo-profile img {
     margin-top: 10px;
     width: 100px;
     border: 1px solid rgba(0, 0, 0, 0.13);
   }
   .seguidores,
   .seguindo,
-  .publicacao-my-accout {
+  .publicacao-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
   }
 }

@@ -6,6 +6,7 @@ import { VscHeartFilled } from 'react-icons/vsc'
 import { VscSearch } from 'react-icons/vsc'
 import './style.css'
 import { Link } from 'react-router-dom'
+import { FaRegComment } from 'react-icons/fa'
 
 export default function NavBar() {
   return (
@@ -36,7 +37,12 @@ export default function NavBar() {
             <VscHeartFilled />
           </div>
         </Link>
-        <Link to={'myaccount'} className="link">
+        <Link to={'/mensagem+'} className="link">
+          <div className="mensagem">
+            <FaRegComment />
+          </div>
+        </Link>
+        <Link to={'account'} className="link">
           <div className="account">
             <VscAccount />
           </div>

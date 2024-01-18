@@ -4,9 +4,10 @@ import Header from '../Components/Header'
 import Pesquisar from '../Page/Pesquisar'
 import AddPost from '../Page/AddPost'
 import Favoritos from '../Page/Favoritos'
-import MyAccount from '../Page/MyAccount'
+
 import Seguidores from '../Page/Seguidores'
 import Seguindo from '../Page/Seguindo'
+import Account from '../Page/Account'
 
 export default function RoutesApp() {
   return (
@@ -17,7 +18,7 @@ export default function RoutesApp() {
         <Route path="/pesquisar" element={<Pesquisar />} />
         <Route path="/addpost" element={<AddPost />} />
         <Route path="/favoritos" element={<Favoritos />} />
-        <Route path="/myaccount" element={<MyAccount />} />
+        <Route path="/account" element={<Account />} />
         <Route path="/seguidores" element={<Seguidores />} />
         <Route path="/seguindo" element={<Seguindo />} />
       </Routes>

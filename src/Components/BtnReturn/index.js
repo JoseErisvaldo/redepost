@@ -5,7 +5,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 export default function BtnReturn() {
   return (
     <div>
-      <Link className="link" to={'/myaccount'}>
+      <Link className="link" to={'/profile'}>
         <div className="return-card-users-rede">
           <IoIosArrowBack />
         </div>

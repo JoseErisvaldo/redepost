@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import UsereRede from '../../Components/UsersRede'
+import UserRede from '../../Components/UsersRede'
 import api from '../../Services'
 import BtnReturn from '../../Components/BtnReturn'
 
@@ -46,7 +46,7 @@ export default function Seguidores() {
       <BtnReturn />
       {filterJoin.map(item =>
         item.seguidores.map(seguidor => (
-          <UsereRede id={seguidor.firstName} status={'Seguidores'} />
+          <UserRede id={seguidor.firstName} status={'Seguidores'} />
         ))
       )}
     </div>
