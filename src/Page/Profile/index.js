@@ -1,30 +1,30 @@
-import { useParams } from 'react-router-dom'
-import Profile from '../../Components/Profile'
-import api from '../../Services'
-import { useEffect, useState } from 'react'
-import PostsPerfil from '../../Components/PostsPerfil'
+import { useParams } from "react-router-dom";
+import Profile from "../../Components/Profile";
+import api from "../../Services";
+import { useEffect, useState } from "react";
+import PostsPerfil from "../../Components/PostsPerfil";
 
 export default function PageProfile() {
-  const { id } = useParams()
-  const [profile, setProfile] = useState(null)
-  const [posts, setPosts] = useState(null)
+  const { id } = useParams();
+  const [profile, setProfile] = useState(null);
+  const [posts, setPosts] = useState(null);
   useEffect(() => {
     try {
       async function loadingUser() {
-        const response = await api.get(`/users/${id}`)
-        setProfile(response.data)
+        const response = await api.get(`/users/${id}`);
+        setProfile(response.data);
       }
-      loadingUser()
+      loadingUser();
 
       async function loadingPosts() {
-        const response = await api.get(`/posts/${id}`)
-        setPosts(response.data)
+        const response = await api.get(`/posts/${id}`);
+        setPosts(response.data);
       }
-      loadingPosts()
+      loadingPosts();
     } catch (error) {
-      console.error('Erro na API:', error)
+      console.error("Erro na API:", error);
     }
-  }, [id])
+  }, [id]);
 
   return (
     <div>
@@ -47,6 +47,7 @@ export default function PageProfile() {
       ) : (
         <>Nenhum publicação !!!</>
       )}
+      <div>Teste</div>
     </div>
-  )
+  );
 }
