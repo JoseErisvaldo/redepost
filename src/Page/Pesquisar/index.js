@@ -21,7 +21,7 @@ export default function Pesquisar() {
     <div>
       {listFilter.map(item => (
         <div>
-          <UserRede id={item.firstName} status={'Seguir'} />
+          <UserRede id={item.id} name={item.firstName} status={'Seguir'} />
         </div>
       ))}
     </div>

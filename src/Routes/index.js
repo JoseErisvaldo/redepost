@@ -8,6 +8,7 @@ import Favoritos from '../Page/Favoritos'
 import Seguidores from '../Page/Seguidores'
 import Seguindo from '../Page/Seguindo'
 import Account from '../Page/Account'
+import PageProfile from '../Page/Profile'
 
 export default function RoutesApp() {
   return (
@@ -21,6 +22,7 @@ export default function RoutesApp() {
         <Route path="/account" element={<Account />} />
         <Route path="/seguidores" element={<Seguidores />} />
         <Route path="/seguindo" element={<Seguindo />} />
+        <Route path="/profile/:id" element={<PageProfile />} />
       </Routes>
     </BrowserRouter>
   )

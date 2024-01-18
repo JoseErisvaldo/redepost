@@ -45,7 +45,7 @@ export default function Account() {
   }, [])
 
   const filterId = user.filter(item => item.id == userId)
-  const filterPost = post.filter(item => item.idUser == userId)
+  const filterPost = post.filter(item => item.id == userId)
   const filterConta = conta.filter(item => {
     return item.id == userId
   })

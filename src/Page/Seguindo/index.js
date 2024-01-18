@@ -42,7 +42,7 @@ export default function Seguindo() {
         item.seguindo.map(seguindo => (
           <UserRede
             key={seguindo.id}
-            id={seguindo.firstName}
+            name={seguindo.firstName}
             status={'Seguindo'}
           />
         ))

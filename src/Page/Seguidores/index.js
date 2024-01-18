@@ -46,7 +46,7 @@ export default function Seguidores() {
       <BtnReturn />
       {filterJoin.map(item =>
         item.seguidores.map(seguidor => (
-          <UserRede id={seguidor.firstName} status={'Seguidores'} />
+          <UserRede name={seguidor.firstName} status={'Seguidores'} />
         ))
       )}
     </div>
