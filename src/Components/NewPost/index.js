@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './style.css'
 import api from '../../Services'
 export default function NewPost() {
@@ -6,7 +6,7 @@ export default function NewPost() {
     // Defina os dados que você deseja enviar no corpo da requisição POST
     comment: '',
     photo: '',
-    userId: 3
+    userId: '3'
   })
 
   // Função para manipular a submissão do formulário
