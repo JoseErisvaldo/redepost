@@ -11,7 +11,7 @@ import Seguindo from '../Page/Seguindo'
 import Account from '../Page/Account'
 import PageProfile from '../Page/Profile'
 import Login from '../Page/Login'
-import { AuthProvider, useAuth } from '../Components/AuthContext'
+import { AuthProvider, useAuth } from '../Components/Contexts'
 
 export default function RoutesApp() {
   return (

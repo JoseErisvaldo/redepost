@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import CompoLogin from '../../Components/Login'
 import api from '../../Services/index.js'
-import { useAuth } from '../../Components/AuthContext/index.js'
+import { useAuth } from '../../Components/Contexts/index.js'
 import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
