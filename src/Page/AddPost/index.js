@@ -1,3 +1,8 @@
+import NewPost from '../../Components/NewPost'
 export default function AddPost() {
-  return <div> Favoritos em construção !!!</div>
+  return (
+    <div>
+      <NewPost />{' '}
+    </div>
+  )
 }

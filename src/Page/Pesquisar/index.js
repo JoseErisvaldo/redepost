@@ -16,7 +16,6 @@ export default function Pesquisar() {
     loadingApi()
   }, [])
   const listFilter = list.filter(item => item.id != userId)
-  console.log(listFilter)
   return (
     <div>
       {listFilter.map(item => (

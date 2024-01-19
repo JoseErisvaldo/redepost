@@ -1,0 +1,40 @@
+#container-input-card {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.card-input-post {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+textarea {
+  resize: none;
+  height: 100px;
+  width: 100%;
+}
+.card-input-post input {
+  margin-top: 10px;
+  height: 25px;
+  width: 100%;
+  margin: 5px;
+}
+#container-input-card button {
+  width: 120px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid rgba(213, 213, 213, 0.882);
+  cursor: pointer;
+}
+
+@media (max-width: 350px) {
+  .card-input-post {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
