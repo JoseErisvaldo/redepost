@@ -3,10 +3,13 @@ import './style.css'
 import api from '../../Services'
 export default function NewPost() {
   const [postData, setPostData] = useState({
-    // Defina os dados que você deseja enviar no corpo da requisição POST
-    comment: '',
-    photo: '',
-    userId: '3'
+    idPost: '11',
+    name: 'Carlos',
+    comment: 'Vai da certo !!!',
+    photo:
+      'https://www.unimedfortaleza.com.br/portaluploads/uploads/2021/03/post-vai-dar-certo.png',
+    created_at: '19/01/2024 12:00',
+    id: '3'
   })
 
   // Função para manipular a submissão do formulário
@@ -24,7 +27,6 @@ export default function NewPost() {
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* Se você quiser um formulário controlado, pode vincular os campos aos estados */}
       <input
         type="text"
         value={postData.comment}

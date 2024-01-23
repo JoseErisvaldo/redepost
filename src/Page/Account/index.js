@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 export default function Account() {
   const [user, setUser] = useState([])
-  const userId = 1
+  const userId = 3
   const [post, setPost] = useState([])
   const [conta, setConta] = useState([])
 
