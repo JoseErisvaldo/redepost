@@ -620,7 +620,7 @@ export default function Home() {
         >
           <button onClick={() => setIsOpen(false)}>close</button>
           <h2 ref={subtitleRef => (subtitle = subtitleRef)}>{dados.name}</h2>
-          <div>Seus Seguidores:</div>
+          <div>Seguindo:</div>
           <ul>
             {dados &&
               dados.listaSeguido &&
