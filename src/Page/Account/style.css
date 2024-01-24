@@ -17,6 +17,11 @@
   width: 75px;
   border-radius: 50%;
 }
+.name-account {
+  text-align: center;
+  padding: 10px;
+  font-size: 26px;
+}
 .dados-account {
   display: flex;
   flex-direction: row;
@@ -27,7 +32,7 @@
 .seguidores,
 .seguindo,
 .publicacao-profile {
-  width: 100px;
+  width: 90%;
   padding: 5px;
   margin: 5px;
   cursor: pointer;
@@ -36,11 +41,23 @@
 .publicacao-my-accout {
 }
 .seguidores {
+  border: 1px solid rgba(207, 207, 207, 0.577);
+  display: flex;
+  justify-content: center;
+  padding: 10px;
 }
 .seguindo {
 }
 .bio-profile {
   margin: 10px;
+}
+.count-seguidores,
+.count-seguindo {
+  width: 100px;
+  background-color: white;
+  border: none;
+  text-align: center;
+  cursor: pointer;
 }
 .post-card {
   margin-top: 20px;

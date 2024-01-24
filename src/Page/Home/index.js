@@ -610,28 +610,7 @@ export default function Home() {
         </Modal>
       </div>
 
-      <div>
-        <Modal
-          isOpen={modalIsOpen}
-          onAfterOpen={() => {}}
-          onRequestClose={() => setIsOpen(false)}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <button onClick={() => setIsOpen(false)}>close</button>
-          <h2 ref={subtitleRef => (subtitle = subtitleRef)}>{dados.name}</h2>
-          <div>Seguindo:</div>
-          <ul>
-            {dados &&
-              dados.listaSeguido &&
-              dados.listaSeguido.map(seguido => (
-                <li key={seguido.id}>
-                  {seguido.name} - {seguido.email}
-                </li>
-              ))}
-          </ul>
-        </Modal>
-      </div>
+      <div></div>
     </div>
   )
 }

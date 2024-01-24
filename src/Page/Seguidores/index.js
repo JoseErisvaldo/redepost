@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import UserRede from '../../Components/UsersRede'
 import api from '../../Services'
 import BtnReturn from '../../Components/BtnReturn'
+import { useParams } from 'react-router-dom'
 
 export default function Seguidores() {
-  const userId = 1
+  const { id } = useParams()
   const [combinedData, setCombinedData] = useState([])
   useEffect(() => {
     async function loadingUsers() {
@@ -36,7 +37,7 @@ export default function Seguidores() {
     loadingUsers()
   }, [])
   const filterJoin = combinedData
-    .filter(item => item.id == userId)
+    .filter(item => item.id == id)
     .map(item => {
       return item.progresso
     })

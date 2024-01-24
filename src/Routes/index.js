@@ -52,7 +52,7 @@ function AppContent() {
           element={isAuthenticated ? <Account /> : <Navigate to="/login" />}
         />
         <Route
-          path="/seguidores"
+          path="/seguidores/:id"
           element={isAuthenticated ? <Seguidores /> : <Navigate to="/login" />}
         />
         <Route

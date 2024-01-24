@@ -5,57 +5,92 @@ import { VscHeart } from 'react-icons/vsc'
 import { FaRegComment } from 'react-icons/fa'
 import { MdOutlineSave } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
 
+Modal.setAppElement('#root')
 export default function Account() {
+  const userId = 1
   const [user, setUser] = useState([])
-  const userId = 3
   const [post, setPost] = useState([])
   const [conta, setConta] = useState([])
+  const [newDados, setNewDados] = useState([])
 
   useEffect(() => {
-    async function loadingDados() {
+    async function fetchData() {
       try {
-        const response = await api.get('/users')
-        setUser(response.data)
+        const usersResponse = api.get('/users')
+        const postsResponse = api.get('/posts')
+        const contaResponse = api.get('/conta')
+
+        const [users, posts, contaData] = await Promise.all([
+          usersResponse,
+          postsResponse,
+          contaResponse
+        ])
+
+        setUser(users.data)
+        setPost(posts.data)
+        setConta(contaData.data)
+
+        // Chame dados dentro de fetchData após todas as solicitações assíncronas serem resolvidas
+        dados(users.data, posts.data, contaData.data)
       } catch (error) {
         console.log(error)
       }
     }
-    loadingDados()
 
-    async function loadingPost() {
-      try {
-        const response = await api.get('/posts')
-        setPost(response.data)
-      } catch (error) {
-        console.log('Erro na api ' + error)
-      }
-    }
-    loadingPost()
-
-    async function loadingConta() {
-      try {
-        const response = await api.get('/conta')
-        setConta(response.data)
-      } catch (error) {
-        console.log('Erro na api' + error)
-      }
-    }
-    loadingConta()
+    fetchData()
   }, [])
 
-  const filterId = user.filter(item => item.id == userId)
-  const filterPost = post.filter(item => item.id == userId)
-  const filterConta = conta.filter(item => {
-    return item.id == userId
-  })
-  const resSeguindo = filterConta.map(item => {
-    return item.seguindo.length
-  })
+  const filterId = newDados.filter(item => item.id == userId)
+  console.log(filterId)
 
-  const resSeguidores = filterConta.map(item => {
-    return item.seguidores.length
-  })
+  function dados(users, posts, conta) {
+    if (users && posts && conta) {
+      let spredDados = users.map(usuarioAtual => {
+        let postsDoUsuario = posts.filter(
+          postagem => postagem.id === usuarioAtual.id
+        )
+        let resConta = conta.filter(seguindo => seguindo.id === usuarioAtual.id)
+
+        return {
+          ...usuarioAtual,
+          posts: postsDoUsuario ? postsDoUsuario : null,
+          progresso: resConta ? resConta : null
+        }
+      })
+      setNewDados(spredDados)
+    }
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: '300px',
+      height: '80vh'
+    }
+  }
+  let subtitle
+  const [modalIsOpenSeguidores, setIsOpen] = useState(false)
+
+  function openModalSeguidores() {
+    setIsOpen(true)
+  }
+
+  function afterOpenModalSeguidores() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00'
+  }
+
+  function closeModalSeguidores() {
+    setIsOpen(false)
+  }
+
   return (
     <div id="card-container-profile">
       {filterId.map(item => (
@@ -63,47 +98,100 @@ export default function Account() {
           <div className="photo-profile">
             <img src={item.image} alt={`Image ${item.id}`} />
           </div>
+          <div className="name-account">
+            {item.firstName} {item.lastName}
+          </div>
           <div>
             <div className="dados-account">
               <div className="publicacao-profile">
-                <span>{filterPost.length}</span> <span>publicações</span>
+                <span>{item.posts.length}</span>
+                <span>publicações</span>
               </div>
-              <Link className="link" to={'/seguidores'}>
-                <div className="seguidores">
-                  <span>{resSeguidores}</span> <span>Seguidores</span>{' '}
-                </div>
-              </Link>
+              <div>
+                <button
+                  className="count-seguidores"
+                  onClick={openModalSeguidores}
+                >
+                  {item.progresso.map(item => (
+                    <>{item.seguidores.length}</>
+                  ))}{' '}
+                  Seguidores
+                </button>
+              </div>
+              <Modal
+                isOpen={modalIsOpenSeguidores}
+                onAfterOpen={afterOpenModalSeguidores}
+                onRequestClose={closeModalSeguidores}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <button
+                  className="btn-close-modal"
+                  onClick={closeModalSeguidores}
+                >
+                  close
+                </button>
+
+                <h2 ref={_subtitle => (subtitle = _subtitle)}>
+                  Seus seguidores
+                </h2>
+                {item.progresso.map(item => (
+                  <div>
+                    {item.seguidores.map(seguidores => (
+                      <div className="seguidores">
+                        <div className="">
+                          {seguidores.id} - {seguidores.dataSeguido}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </Modal>
               <div className="seguindo">
-                <Link className="link" to={'/seguindo'}>
-                  <span>{resSeguindo}</span> <span>Seguindo</span>{' '}
-                </Link>
+                <button className="count-seguindo">
+                  {item.progresso.map(item => (
+                    <>{item.seguindo.length}</>
+                  ))}{' '}
+                  Seguindo
+                </button>{' '}
               </div>
             </div>
             <div className="bio-profile">
               {item.bio && <div>{item.bio}</div>}
             </div>
           </div>
-          {filterPost.map(postItem => (
-            <div className="post-card" key={postItem.idPost}>
-              <img src={postItem.photo} alt={`Post ${postItem.idPost}`} />
-              <div className="post-details">
-                <span>{postItem.name}</span>
-                <p>{postItem.comment}</p>
-                <div className="post-date">{postItem.creat_att}</div>
+          <div id="card-container-profile">
+            {filterId.map(item => (
+              <div className="container-profile" key={item.id}>
+                <div>
+                  <div className="bio-profile">
+                    {item.bio && <div>{item.bio}</div>}
+                  </div>
+                </div>
+                {item.posts.map(postItem => (
+                  <div className="post-card" key={postItem.idPost}>
+                    <img src={postItem.photo} alt={`Post ${postItem.idPost}`} />
+                    <div className="post-details">
+                      <span>{postItem.name}</span>
+                      <p>{postItem.comment}</p>
+                      <div className="post-date">{postItem.creat_att}</div>
+                    </div>
+                    <div className="interacao-post">
+                      <div>
+                        <VscHeart />
+                      </div>
+                      <div>
+                        <FaRegComment />
+                      </div>
+                      <div>
+                        <MdOutlineSave />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="interacao-post">
-                <div>
-                  <VscHeart />
-                </div>
-                <div>
-                  <FaRegComment />
-                </div>
-                <div>
-                  <MdOutlineSave />
-                </div>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       ))}
     </div>
