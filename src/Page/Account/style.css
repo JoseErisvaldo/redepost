@@ -84,7 +84,16 @@
 .post-details p {
   margin-top: 5px;
 }
-
+.btn-close-modal {
+  border: none;
+  font-size: 30px;
+  background-color: white;
+  cursor: pointer;
+}
+.link {
+  color: black;
+  text-decoration: none;
+}
 @media (max-width: 560px) {
   #card-container-profile {
     display: flex;

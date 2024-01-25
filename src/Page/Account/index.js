@@ -6,6 +6,7 @@ import { FaRegComment } from 'react-icons/fa'
 import { MdOutlineSave } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
+import { IoMdClose } from 'react-icons/io'
 
 Modal.setAppElement('#root')
 export default function Account() {
@@ -43,7 +44,6 @@ export default function Account() {
   }, [])
 
   const filterId = newDados.filter(item => item.id == userId)
-  console.log(filterId)
 
   function dados(users, posts, conta) {
     if (users && posts && conta) {
@@ -77,18 +77,29 @@ export default function Account() {
   }
   let subtitle
   const [modalIsOpenSeguidores, setIsOpen] = useState(false)
+  const [modalIsOpenSeguindo, setIsOpenSeguindo] = useState(false)
 
   function openModalSeguidores() {
     setIsOpen(true)
   }
+  function openModalSeguindo() {
+    setIsOpenSeguindo(true)
+  }
 
   function afterOpenModalSeguidores() {
     // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00'
+    subtitle.style.color = '#black'
+  }
+  function afterOpenModalSeguindo() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#black'
   }
 
   function closeModalSeguidores() {
     setIsOpen(false)
+  }
+  function closeModalSeguindo() {
+    setIsOpenSeguindo(false)
   }
 
   return (
@@ -129,7 +140,7 @@ export default function Account() {
                   className="btn-close-modal"
                   onClick={closeModalSeguidores}
                 >
-                  close
+                  <IoMdClose />
                 </button>
 
                 <h2 ref={_subtitle => (subtitle = _subtitle)}>
@@ -138,24 +149,56 @@ export default function Account() {
                 {item.progresso.map(item => (
                   <div>
                     {item.seguidores.map(seguidores => (
-                      <div className="seguidores">
-                        <div className="">
-                          {seguidores.id} - {seguidores.dataSeguido}
+                      <Link className="link" to={`/profile/${seguidores.id}`}>
+                        <div className="seguidores">
+                          <div className="">
+                            {seguidores.id} - {seguidores.dataSeguido}
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                     ))}
                   </div>
                 ))}
               </Modal>
               <div className="seguindo">
-                <button className="count-seguindo">
+                <button className="count-seguindo" onClick={openModalSeguindo}>
                   {item.progresso.map(item => (
                     <>{item.seguindo.length}</>
                   ))}{' '}
                   Seguindo
                 </button>{' '}
+                <Modal
+                  isOpen={modalIsOpenSeguindo}
+                  onAfterOpen={afterOpenModalSeguindo}
+                  onRequestClose={closeModalSeguindo}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <button
+                    className="btn-close-modal"
+                    onClick={closeModalSeguindo}
+                  >
+                    <IoMdClose />
+                  </button>
+
+                  <h2 ref={_subtitle => (subtitle = _subtitle)}>Seguindo</h2>
+                  {item.progresso.map(item => (
+                    <div>
+                      {item.seguindo.map(seguindo => (
+                        <div className="seguidores">
+                          <Link className="link" to={`/profile/${seguindo.id}`}>
+                            <div className="">
+                              {seguindo.id} - {seguindo.dataSeguido}
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </Modal>
               </div>
             </div>
+
             <div className="bio-profile">
               {item.bio && <div>{item.bio}</div>}
             </div>

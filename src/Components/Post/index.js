@@ -26,7 +26,7 @@ export default function Posts() {
             </div>
             <div>{item.creat_att}</div>
           </div>
-          <div>
+          <div className="card-img">
             <img className="post-img" src={item.photo} />
           </div>
           <div className="post-mensagem">{item.comment}</div>

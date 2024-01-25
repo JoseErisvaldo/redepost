@@ -1,67 +1,243 @@
-import { useParams } from 'react-router-dom'
-import Profile from '../../Components/Profile'
 import api from '../../Services'
+
 import { useEffect, useState } from 'react'
-import PostsPerfil from '../../Components/PostsPerfil'
+import { VscHeart } from 'react-icons/vsc'
+import { FaRegComment } from 'react-icons/fa'
+import { MdOutlineSave } from 'react-icons/md'
+import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
+import { IoMdClose } from 'react-icons/io'
+import { useParams } from 'react-router-dom'
 
-export default function PageProfile() {
+Modal.setAppElement('#root')
+export default function Profile() {
   const { id } = useParams()
-  const [profile, setProfile] = useState(null)
-  const [posts, setPosts] = useState([])
+  const [user, setUser] = useState([])
+  const [post, setPost] = useState([])
+  const [conta, setConta] = useState([])
+  const [newDados, setNewDados] = useState([])
 
   useEffect(() => {
-    try {
-      async function loadingUser() {
-        const response = await api.get(`/users/${id}`)
-        setProfile(response.data) // Assumindo que o endpoint retorna um objeto
-      }
+    async function fetchData() {
+      try {
+        const usersResponse = api.get('/users')
+        const postsResponse = api.get('/posts')
+        const contaResponse = api.get('/conta')
 
-      async function loadingPosts() {
-        const response = await api.get(`/posts`)
-        setPosts(response.data)
-      }
+        const [users, posts, contaData] = await Promise.all([
+          usersResponse,
+          postsResponse,
+          contaResponse
+        ])
 
-      // Carregar dados
-      loadingUser()
-      loadingPosts()
-    } catch (error) {
-      console.error('Erro na API:', error)
+        setUser(users.data)
+        setPost(posts.data)
+        setConta(contaData.data)
+
+        // Chame dados dentro de fetchData após todas as solicitações assíncronas serem resolvidas
+        dados(users.data, posts.data, contaData.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }, [id])
 
-  useEffect(() => {
-    if (profile && Array.isArray(profile) && posts.length > 0) {
-      const resMap = posts.map(item => {
-        const resPro = profile.find(pro => pro.id === item.userId) // Supondo que o campo de usuário no post seja userId
-        console.log(resPro)
+    fetchData()
+  }, [])
+
+  const filterId = newDados.filter(item => item.id == id)
+
+  function dados(users, posts, conta) {
+    if (users && posts && conta) {
+      let spredDados = users.map(usuarioAtual => {
+        let postsDoUsuario = posts.filter(
+          postagem => postagem.id === usuarioAtual.id
+        )
+        let resConta = conta.filter(seguindo => seguindo.id === usuarioAtual.id)
+
+        return {
+          ...usuarioAtual,
+          posts: postsDoUsuario ? postsDoUsuario : null,
+          progresso: resConta ? resConta : null
+        }
       })
+      setNewDados(spredDados)
     }
-  }, [profile, posts])
+  }
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+      width: '300px',
+      height: '80vh'
+    }
+  }
+  let subtitle
+  const [modalIsOpenSeguidores, setIsOpen] = useState(false)
+  const [modalIsOpenSeguindo, setIsOpenSeguindo] = useState(false)
+
+  function openModalSeguidores() {
+    setIsOpen(true)
+  }
+  function openModalSeguindo() {
+    setIsOpenSeguindo(true)
+  }
+
+  function afterOpenModalSeguidores() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#black'
+  }
+  function afterOpenModalSeguindo() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#black'
+  }
+
+  function closeModalSeguidores() {
+    setIsOpen(false)
+  }
+  function closeModalSeguindo() {
+    setIsOpenSeguindo(false)
+  }
+
   return (
-    <div>
-      {profile && (
-        <div>
-          <Profile
-            key={profile.id}
-            id={profile.id}
-            name={profile.firstName}
-            image={profile.image}
-          />
+    <div id="card-container-profile">
+      {filterId.map(item => (
+        <div className="container-profile" key={item.id}>
+          <div className="photo-profile">
+            <img src={item.image} alt={`Image ${item.id}`} />
+          </div>
+          <div className="name-account">
+            {item.firstName} {item.lastName}
+          </div>
+          <div>
+            <div className="dados-account">
+              <div className="publicacao-profile">
+                <span>{item.posts.length}</span>
+                <span>publicações</span>
+              </div>
+              <div>
+                <button
+                  className="count-seguidores"
+                  onClick={openModalSeguidores}
+                >
+                  {item.progresso.map(item => (
+                    <>{item.seguidores.length}</>
+                  ))}{' '}
+                  Seguidores
+                </button>
+              </div>
+              <Modal
+                isOpen={modalIsOpenSeguidores}
+                onAfterOpen={afterOpenModalSeguidores}
+                onRequestClose={closeModalSeguidores}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <button
+                  className="btn-close-modal"
+                  onClick={closeModalSeguidores}
+                >
+                  <IoMdClose />
+                </button>
+
+                <h2 ref={_subtitle => (subtitle = _subtitle)}>
+                  Seus seguidores
+                </h2>
+                {item.progresso.map(item => (
+                  <div>
+                    {item.seguidores.map(seguidores => (
+                      <Link className="link" to={`/profile/${seguidores.id}`}>
+                        <div className="seguidores">
+                          <div className="">
+                            {seguidores.id} - {seguidores.dataSeguido}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </Modal>
+              <div className="seguindo">
+                <button className="count-seguindo" onClick={openModalSeguindo}>
+                  {item.progresso.map(item => (
+                    <>{item.seguindo.length}</>
+                  ))}{' '}
+                  Seguindo
+                </button>{' '}
+                <Modal
+                  isOpen={modalIsOpenSeguindo}
+                  onAfterOpen={afterOpenModalSeguindo}
+                  onRequestClose={closeModalSeguindo}
+                  style={customStyles}
+                  contentLabel="Example Modal"
+                >
+                  <button
+                    className="btn-close-modal"
+                    onClick={closeModalSeguindo}
+                  >
+                    <IoMdClose />
+                  </button>
+
+                  <h2 ref={_subtitle => (subtitle = _subtitle)}>Seguindo</h2>
+                  {item.progresso.map(item => (
+                    <div>
+                      {item.seguindo.map(seguindo => (
+                        <Link className="link" to={`/profile/${seguindo.id}`}>
+                          <div className="seguidores">
+                            <div className="">
+                              {seguindo.id} - {seguindo.dataSeguido}
+                            </div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </Modal>
+              </div>
+            </div>
+
+            <div className="bio-profile">
+              {item.bio && <div>{item.bio}</div>}
+            </div>
+          </div>
+          <div id="card-container-profile">
+            {filterId.map(item => (
+              <div className="container-profile" key={item.id}>
+                <div>
+                  <div className="bio-profile">
+                    {item.bio && <div>{item.bio}</div>}
+                  </div>
+                </div>
+                {item.posts.map(postItem => (
+                  <div className="post-card" key={postItem.idPost}>
+                    <img src={postItem.photo} alt={`Post ${postItem.idPost}`} />
+                    <div className="post-details">
+                      <span>{postItem.name}</span>
+                      <p>{postItem.comment}</p>
+                      <div className="post-date">{postItem.creat_att}</div>
+                    </div>
+                    <div className="interacao-post">
+                      <div>
+                        <VscHeart />
+                      </div>
+                      <div>
+                        <FaRegComment />
+                      </div>
+                      <div>
+                        <MdOutlineSave />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
-      )}
-
-      {posts.map(post => (
-        <PostsPerfil
-          key={post.id}
-          name={post.name}
-          comment={post.comment}
-          criado={post.created_at}
-          photo={post.photo}
-        />
       ))}
-      {posts.length === 0 && <p>Sem posts disponíveis.</p>}
-
-      <div>Teste</div>
     </div>
   )
 }
