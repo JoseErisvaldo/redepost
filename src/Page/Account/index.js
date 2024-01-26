@@ -7,6 +7,7 @@ import { MdOutlineSave } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { IoMdClose } from 'react-icons/io'
+import NewPost from '../../Components/NewPost'
 
 Modal.setAppElement('#root')
 export default function Account() {
@@ -182,6 +183,7 @@ export default function Account() {
                   </button>
 
                   <h2 ref={_subtitle => (subtitle = _subtitle)}>Seguindo</h2>
+
                   {item.progresso.map(item => (
                     <div>
                       {item.seguindo.map(seguindo => (
@@ -198,7 +200,7 @@ export default function Account() {
                 </Modal>
               </div>
             </div>
-
+            <NewPost />
             <div className="bio-profile">
               {item.bio && <div>{item.bio}</div>}
             </div>

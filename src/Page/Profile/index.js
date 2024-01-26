@@ -150,7 +150,11 @@ export default function Profile() {
                 {item.progresso.map(item => (
                   <div>
                     {item.seguidores.map(seguidores => (
-                      <Link className="link" to={`/profile/${seguidores.id}`}>
+                      <Link
+                        onClick={closeModalSeguidores}
+                        className="link"
+                        to={`/profile/${seguidores.id}`}
+                      >
                         <div className="seguidores">
                           <div className="">
                             {seguidores.id} - {seguidores.dataSeguido}
@@ -186,7 +190,11 @@ export default function Profile() {
                   {item.progresso.map(item => (
                     <div>
                       {item.seguindo.map(seguindo => (
-                        <Link className="link" to={`/profile/${seguindo.id}`}>
+                        <Link
+                          onClick={closeModalSeguindo}
+                          className="link"
+                          to={`/profile/${seguindo.id}`}
+                        >
                           <div className="seguidores">
                             <div className="">
                               {seguindo.id} - {seguindo.dataSeguido}

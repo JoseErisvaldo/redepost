@@ -1,33 +1,30 @@
 #container-input-card {
+  width: 100%;
   margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-.card-input-post {
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 textarea {
+  margin-bottom: 10px;
   resize: none;
-  height: 100px;
-  width: 100%;
+  height: 50px;
+  width: 320px;
 }
-.card-input-post input {
-  margin-top: 10px;
+#container-input-card input {
+  margin-bottom: 10px;
   height: 25px;
-  width: 100%;
   margin: 5px;
 }
 #container-input-card button {
   width: 120px;
   height: 30px;
-  background-color: white;
-  border: 1px solid rgba(213, 213, 213, 0.882);
+  background-color: rgb(255, 107, 1);
+  border: none;
   cursor: pointer;
+  color: white;
 }
 
 @media (max-width: 350px) {

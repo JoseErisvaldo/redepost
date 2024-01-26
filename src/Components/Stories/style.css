@@ -1,5 +1,6 @@
 .card-stories {
   display: flex;
+  justify-content: center;
 }
 
 .img-stories {
