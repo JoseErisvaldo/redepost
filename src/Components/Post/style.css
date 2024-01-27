@@ -48,15 +48,41 @@
   display: flex;
   cursor: pointer;
 }
+
 .status-interacao-comments div {
   margin: 2px;
 }
-.interacao-post {
+.container-modal {
   display: flex;
-  font-size: 22px;
+  flex-direction: column;
 }
-.interacao-post div {
-  margin: 5px;
+.open-comments {
+  width: 100%;
+}
+.open-comments button {
+  border: none;
+  background-color: white;
+  cursor: pointer;
+}
+textarea {
+  border: 1px solid rgb(216, 216, 216);
+}
+
+.container-comments {
+  margin: 10px;
+  border: 1px solid rgb(244, 244, 244);
+  padding: 10px;
+}
+.comments-users {
+  display: flex;
+  align-items: center;
+}
+.comments-img img {
+  width: 40px;
+  margin: 10px;
+}
+.comments-resposta {
+  color: rgba(155, 155, 155, 0.574);
 }
 
 @media (max-width: 550px) {

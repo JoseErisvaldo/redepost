@@ -1,0 +1,7 @@
+.interacao-post {
+  display: flex;
+  font-size: 22px;
+}
+.interacao-post div {
+  margin: 5px;
+}

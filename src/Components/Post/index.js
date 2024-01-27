@@ -1,31 +1,37 @@
 import { useEffect, useState } from 'react'
 import api from '../../Services'
 import './style.css'
-import { VscHeart } from 'react-icons/vsc'
-import { FaRegComment } from 'react-icons/fa'
-import { MdOutlineSave } from 'react-icons/md'
 
+import Modal from 'react-modal'
+import BtnInteracao from '../BtnIteracao'
+import BtnPadrao from '../BtnPadrao'
+import BtnClose from '../Btns'
+
+Modal.setAppElement('#root')
 export default function Posts() {
   const [listPost, setPost] = useState([])
   const [comentarios, setComentarios] = useState([])
   const [listLikes, setLikes] = useState([])
   const [newView, setNewView] = useState([])
+  const [users, setUsers] = useState([])
   useEffect(() => {
     async function fetchData() {
       try {
         const commentsResponse = await api.get('/comentarios')
         const postsResponse = await api.get('/posts')
         const likesResponse = await api.get('/likes')
-
-        const [comment, posts, likes] = await Promise.all([
+        const usersResponse = await api.get('/users')
+        const [comment, posts, likes, users] = await Promise.all([
           commentsResponse,
           postsResponse,
-          likesResponse
+          likesResponse,
+          usersResponse
         ])
 
         setComentarios(comment.data)
         setPost(posts.data)
         setLikes(likes.data)
+        setUsers(users.data)
       } catch (error) {
         console.log(error)
       }
@@ -44,7 +50,6 @@ export default function Posts() {
         return { ...post, listComments, listLike }
       })
       setNewView(mapList)
-      console.log(newView)
     }
   }
 
@@ -53,6 +58,49 @@ export default function Posts() {
       spredComments()
     }
   }, [listPost, comentarios, listLikes])
+
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)'
+    }
+  }
+  const [clicar, setClicar] = useState([])
+  let subtitle
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+  function openModal(e) {
+    setClicar(e)
+    setIsOpen(true)
+  }
+
+  const [dadosModal, setDadosModal] = useState([])
+  useEffect(() => {
+    const idPost = clicar
+
+    const modalComments = comentarios.filter(
+      comments => comments.idPost === idPost
+    )
+    const resModal = modalComments.map(comments => {
+      const user = users.filter(user => user.id === comments.id)
+
+      return { ...comments, user }
+    })
+    setDadosModal(resModal)
+    console.log(resModal)
+  }, [clicar])
+
+  function afeterOpenModal() {
+    subtitle.style.color = 'black'
+  }
+  function closeModal() {
+    setIsOpen(false)
+  }
+
   return (
     <div id="container-post">
       {newView.map(item => (
@@ -83,26 +131,60 @@ export default function Posts() {
             </div>
           </div>
           <div className="status-interacao-comments">
-            {item.listComments.length > 0 && (
-              <div>
-                Comentado por ID: {item.listComments.find(item => true).id}{' '}
-              </div>
-            )}
-            {item.listComments.length >= 2 && (
-              <div>e outras {item.listComments.length}</div>
-            )}
+            <div className="open-comments">
+              <button
+                onClick={e => {
+                  openModal(item.idPost)
+                }}
+              >
+                {item.listComments.length > 0 && (
+                  <span>
+                    Comentado por ID: {item.listComments.find(item => true).id}{' '}
+                  </span>
+                )}
+                {item.listComments.length >= 2 && (
+                  <span>e outras {item.listComments.length} pessoas</span>
+                )}
+              </button>
+              <Modal
+                isOpen={modalIsOpen}
+                onAfterOpen={afeterOpenModal}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+                <BtnClose onClick={closeModal} />
+                <div className="container-modal">
+                  <h2 ref={_subtitle => (subtitle = _subtitle)}>Comentarios</h2>
+                  <textarea
+                    className="comments-textarea"
+                    placeholder="Comentar"
+                  ></textarea>
+                  <BtnPadrao id={'Enviar'} />
+                  {dadosModal.map(item => (
+                    <div className="container-comments">
+                      <div className="comments-users">
+                        {item.user.map(user => (
+                          <>
+                            <div className="comments-img">
+                              <img src={user.image} />
+                            </div>
+                            <div className="comments-name">
+                              {user.firstName}
+                            </div>
+                          </>
+                        ))}
+                      </div>
+                      <div className="comments-comments">{item.comentario}</div>
+                      <BtnInteracao />
+                      <div className="comments-resposta">Responder</div>
+                    </div>
+                  ))}
+                </div>
+              </Modal>
+            </div>
           </div>
-          <div cla ssName="interacao-post">
-            <div>
-              <VscHeart />
-            </div>
-            <div>
-              <FaRegComment />
-            </div>
-            <div>
-              <MdOutlineSave />
-            </div>
-          </div>
+          <BtnInteracao />
         </div>
       ))}
     </div>
