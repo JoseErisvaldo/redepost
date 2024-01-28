@@ -6,6 +6,7 @@ import Modal from 'react-modal'
 import BtnInteracao from '../BtnIteracao'
 import BtnPadrao from '../BtnPadrao'
 import BtnClose from '../Btns'
+import { Link } from 'react-router-dom'
 
 Modal.setAppElement('#root')
 export default function Posts() {
@@ -47,7 +48,10 @@ export default function Posts() {
           comment => comment.idPost === post.idPost
         )
         const listLike = listLikes.filter(likes => likes.idPost === post.idPost)
-        return { ...post, listComments, listLike }
+
+        const nameUser = users.filter(user => user.id === post.id)
+
+        return { ...post, listComments, listLike, nameUser }
       })
       setNewView(mapList)
     }
@@ -91,7 +95,6 @@ export default function Posts() {
       return { ...comments, user }
     })
     setDadosModal(resModal)
-    console.log(resModal)
   }, [clicar])
 
   function afeterOpenModal() {
@@ -100,18 +103,32 @@ export default function Posts() {
   function closeModal() {
     setIsOpen(false)
   }
-
   return (
     <div id="container-post">
       {newView.map(item => (
-        <div className="card-post" key={item.id}>
-          <div className="card-title-post">
-            <div className="card-perfil">
-              <div className="perfil-photo"></div>
-              <div> {item.name}</div>
+        <div className="card-post" key={item.idPost}>
+          <Link className="link" to={`/profile/${item.id}`}>
+            <div className="card-title-post">
+              <div className="card-perfil">
+                <div className="perfil-photo">
+                  {item.nameUser.map(photo => (
+                    <>
+                      <img src={photo.image} key={photo.id} />
+                    </>
+                  ))}
+                </div>
+                <div> {item.name}</div>
+              </div>
+              <div className="post-name">
+                {item.nameUser.map(item => (
+                  <div key={item.id}>
+                    {item.firstName} {item.lastName}
+                  </div>
+                ))}
+              </div>
+              <div>{item.creat_att}</div>
             </div>
-            <div>{item.creat_att}</div>
-          </div>
+          </Link>
           <div className="card-img">
             <img className="post-img" src={item.photo} />
           </div>
@@ -162,19 +179,21 @@ export default function Posts() {
                   ></textarea>
                   <BtnPadrao id={'Enviar'} />
                   {dadosModal.map(item => (
-                    <div className="container-comments">
-                      <div className="comments-users">
-                        {item.user.map(user => (
-                          <>
-                            <div className="comments-img">
-                              <img src={user.image} />
-                            </div>
-                            <div className="comments-name">
-                              {user.firstName}
-                            </div>
-                          </>
-                        ))}
-                      </div>
+                    <div className="container-comments" key={item.id}>
+                      <Link to={`/profile/${item.id}`}>
+                        <div className="comments-users">
+                          {item.user.map(user => (
+                            <>
+                              <div className="comments-img" key={user.idPost}>
+                                <img src={user.image} />
+                              </div>
+                              <div className="comments-name">
+                                {user.firstName}
+                              </div>
+                            </>
+                          ))}
+                        </div>
+                      </Link>
                       <div className="comments-comments">{item.comentario}</div>
                       <BtnInteracao />
                       <div className="comments-resposta">Responder</div>

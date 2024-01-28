@@ -3,12 +3,9 @@ import './style.css'
 import api from '../../Services'
 export default function NewPost() {
   const [postData, setPostData] = useState({
-    idPost: '',
+    id: '5',
     name: '',
-    comment: '',
-    photo: '',
-    created_at: '',
-    id: ''
+    file: ''
   })
 
   // Função para manipular a submissão do formulário
@@ -18,8 +15,14 @@ export default function NewPost() {
     try {
       // Faça a requisição POST usando Axios
       const response = await api.post(
-        'https://api-redepost.vercel.app/posts',
-        postData
+        'https://sheetdb.io/api/v1/nhadsl9su5cg0',
+        postData,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: 'Basic ' + btoa('pkldys0h:sgqtwfgi9fzsakrxdoj9')
+          }
+        }
       )
       console.log('Resposta do servidor:', response.data)
     } catch (error) {
@@ -31,8 +34,8 @@ export default function NewPost() {
     <form onSubmit={handleSubmit} id="container-input-card">
       <textarea
         type="text"
-        value={postData.comment}
-        onChange={e => setPostData({ ...postData, comment: e.target.value })}
+        value={postData.name}
+        onChange={e => setPostData({ ...postData, name: e.target.value })}
       />
       <input type="file" />
       <button type="submit">Enviar POST</button>

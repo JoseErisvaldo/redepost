@@ -63,7 +63,6 @@ function AppContent() {
           path="/profile/:id"
           element={isAuthenticated ? <PageProfile /> : <Navigate to="/login" />}
         />
-        {/* Adicione mais rotas conforme necessário */}
       </Routes>
     </>
   )
