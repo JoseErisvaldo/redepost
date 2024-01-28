@@ -19,9 +19,12 @@
   margin: 10px;
   width: 60px;
   height: 60px;
-  background-color: rgb(173, 172, 172);
   border-radius: 50%;
 }
+.img-users-rede img {
+  width: 100%;
+}
+
 .name-users-rede {
   width: 170px;
 }
@@ -30,10 +33,12 @@
   text-align: end;
 }
 .btn-users-rede {
-  background-color: none;
+  width: 100px;
+  background-color: orange;
   border: 1px solid rgb(214, 213, 213);
   border-radius: 5px;
   padding: 5px;
+  color: white;
 }
 .link-dados-users {
   display: flex;
@@ -53,5 +58,8 @@
   .img-users-rede {
     width: 60px;
     height: 45px;
+  }
+  .img-users-rede img {
+    width: 80%;
   }
 }

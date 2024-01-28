@@ -1,0 +1,9 @@
+.btn-users-rede {
+  width: 100px;
+  background-color: orange;
+  border: 1px solid rgb(214, 213, 213);
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}

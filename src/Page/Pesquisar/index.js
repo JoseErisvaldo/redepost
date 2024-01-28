@@ -5,7 +5,7 @@ import api from '../../Services'
 export default function Pesquisar() {
   const userId = 1
   const [list, setList] = useState([])
-  useEffect(item => {
+  useEffect(() => {
     async function loadingApi() {
       try {
         const response = await api.get('/users')
@@ -19,8 +19,13 @@ export default function Pesquisar() {
   return (
     <div>
       {listFilter.map(item => (
-        <div>
-          <UserRede id={item.id} name={item.firstName} status={'Seguir'} />
+        <div key={item.id}>
+          <UserRede
+            photo={item.image}
+            id={item.id}
+            name={item.firstName}
+            status={'Seguir'}
+          />
         </div>
       ))}
     </div>
